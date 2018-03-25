@@ -4,7 +4,6 @@ import time
 from database import store
 
 base_dir = '/sys/bus/w1/devices/'
-sqlite_path = '/Users/a0x3c3e/data/temperature.db'
 
 
 def read_temp_raw():

@@ -1,6 +1,6 @@
 import sqlite3
 
-sqlite_path = '/Users/a0x3c3e/data/temperature.db'
+sqlite_path = '/home/pi/data/temperature.db'
 
 def store(temperature):
     conn = sqlite3.connect(sqlite_path)
