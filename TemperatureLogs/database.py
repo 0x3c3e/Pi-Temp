@@ -7,7 +7,7 @@ def store(temperature):
     curs = conn.cursor()
     try:
         curs.execute(
-            """INSERT INTO temperatures VALUES(datetime(),(?))""", [temperature]
+            """INSERT INTO temperatures VALUES(datetime('now','localtime'),(?))""", [temperature]
         )
     except:
         curs.execute("""CREATE TABLE temperatures (date DATETIME, temperature FLOAT)""")
