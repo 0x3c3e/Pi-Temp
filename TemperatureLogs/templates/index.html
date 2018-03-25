@@ -1,27 +1,32 @@
 <head>
-   <!-- Plotly.js -->
-   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!-- Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 </head>
+
 <body>
-   <div id="myDiv">
-      <!-- Plotly chart will be drawn inside this DIV -->
-   </div>
-   <script>
-      function load() {
-          return $.ajax({
-                url: "/get",
-                type: "GET"
-          }).done(function(data) {
-              const x = Array.from(data, (k) => k[0]);
-              const y = Array.from(data, (k) => k[1]);
-              var d = [{x: x, y: y, type: 'scatter'}];
+    <div id="myDiv">
+        <!-- Plotly chart will be drawn inside this DIV -->
+    </div>
+    <script>
+        var urlParams = new URLSearchParams(window.location.search);
+             date_from = urlParams.get('from');
+              date_to = urlParams.get('to');
+          function load() {
+              return $.ajax({
+                    url: "/get?from="+date_from + "&to=" + date_to,
+                    type: "GET"
+              }).done(function(data) {
+                  const x = Array.from(data, (k) => k[0]);
+                  const y = Array.from(data, (k) => k[1]);
+                  var d = [{x: x, y: y, type: 'scatter'}];
 
-      Plotly.newPlot('myDiv', d);
-           }
-         )}
-         load();
-
-
-   </script>
+          Plotly.newPlot('myDiv', d);
+               }
+             )}
+             load();
+             setInterval(function(){
+        load()
+    }, 60000);
+    </script>
 </body>
